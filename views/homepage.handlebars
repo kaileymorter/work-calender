@@ -1,0 +1,13 @@
+<ol class="row employee-list">
+{{#each employees as | employee |}}
+
+{{> employee-info employee}}
+
+{{else}}
+{{#if loggedIn}}
+{{else}}
+<h2>There are no calendars yet! <a href="/login">Login</a> or <a href="/login">sign-up</a> to write the first one!</h2>
+{{/if}}
+
+{{/each}}
+</ol>

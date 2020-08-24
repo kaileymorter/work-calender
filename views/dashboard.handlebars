@@ -1,0 +1,68 @@
+<div class='calendar-heading'>
+<h1 class="orange-text">{{employee.firstname}} {{employee.lastname}}'s Dashboard</h1>
+</div>
+
+{{#unless employee.calendars}}
+{{else}}
+<h2 class="orange-text">Day Calendars</h2>
+<div>
+    {{#each employee.calendars}}
+    <div class="item">
+        <h3 class="calendar-date">{{format_date_long date}}</h3>
+        {{#if events}}
+        <h4>Events:</h4>
+        {{#each events}}
+        <div class="event">
+            <p class="event-title">{{title}}</p>
+            <p class="event-description">{{description}}</p>
+            <p>When: {{start_time}}-{{end_time}}</p>
+            <button type="submit" class="delete-event-btn btn-small red" data-id={{id}}>Delete Event</button>
+        </div>
+           {{/each}}
+        {{/if}}
+         <button type="submit" class="delete-calendar-btn btn-small light-blue" data-id={{id}}>Delete Calendar</button>
+    </div>
+    {{/each}}
+</div>
+{{/unless}}
+
+<h2 class="orange-text">Add Day Calendar</h2>
+<form class='item add-calendar-form'>
+    <div>
+        <h4>Date</h4>
+        <input type="date" name="calendar-date">
+    </div>
+    <div>
+        <button class="btn-small light-blue">Add Calendar</button>
+    </div>
+</form>
+
+<h2 class="orange-text">Add Event to Calendar</h2>
+<form class="add-event-form form">
+    <div>
+        <h4>Title</h4>
+        <input name="event-title">
+        <h4>Description</h4>
+        <textarea name="event-description"></textarea>
+        <h4>Calendar</h4>
+        <select class="browser-default" name="event-calendar">
+            {{#each employee.calendars}}
+            <option value="{{id}}">{{format_date_short date}}</option>
+            {{/each}}
+        </select>
+        <h4>Start Time</h4>
+        <input type="time" name="event-start_time">
+        <h4>End Time</h4>
+        <input type="time" name="event-end_time">
+        <br>
+    </div>
+    <div>
+        <button class="btn-small light-blue">Add Event</button>
+    </div>
+</form>
+
+
+<script src="/javascript/add-event.js"></script>
+<script src="/javascript/add-calendar.js"></script>
+<script src="/javascript/delete-event.js"></script>
+<script src="/javascript/delete-calendar.js"></script>
